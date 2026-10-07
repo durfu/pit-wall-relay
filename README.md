@@ -1,5 +1,8 @@
 # Pit Wall Relay
 
+**[Website & download page](https://durfu.ro/pitwall/#relay)** ·
+**[Get Pit Wall on Google Play](https://play.google.com/store/apps/details?id=com.durfu.pitwall)**
+
 Pit Wall Relay connects to **Gran Turismo 7** on your PS4 or PS5, receives
 its live telemetry over your local network, and passes it on to **Pit Wall**
 dashboards on any device: a phone, a tablet, another computer or a web
@@ -16,8 +19,11 @@ with nothing to install.
 
 ## Download
 
-**[Download the latest release](https://github.com/durfu/pit-wall-relay/releases/latest)**
-and pick the file for your computer:
+The easiest way is the **[download page](https://durfu.ro/pitwall/#relay)**:
+it picks the right file for your computer and walks you through setup.
+
+Or **[download the latest release](https://github.com/durfu/pit-wall-relay/releases/latest)**
+here and pick the file for your computer:
 
 | Your computer | File to download |
 | --- | --- |
@@ -173,10 +179,10 @@ retries every 10 seconds until it finds the console.
 : Make sure the console is on and on the same network, then pass its
   address with `--ps-ip`.
 
-**Pit Wall says "Waiting for telemetry", or values stay at zero**
+**Pit Wall says "Waiting for telemetry" or "Waiting for the track"**
 : Check the relay is still running and connected to the right PlayStation
-  address. Live values only appear while you're in a session in GT7 (on
-  track, in a race, practice and so on), not in the menus.
+  address. Live values only appear while your car is on track in GT7 (a
+  race, practice, time trial and so on), not in the menus.
 
 **A dashboard can't connect to the relay**
 : Check the device is on the same network, the firewall prompt was allowed
@@ -205,7 +211,10 @@ in PowerShell and compare the hash with the line in `SHA256SUMS.txt`.
 
 ---
 
-This repository only hosts release downloads.
+This repository only hosts release downloads. Pit Wall itself, the
+dashboard app, is on
+[Google Play](https://play.google.com/store/apps/details?id=com.durfu.pitwall);
+more at [durfu.ro/pitwall](https://durfu.ro/pitwall).
 
 Pit Wall is not affiliated with or endorsed by Sony Interactive
 Entertainment or Polyphony Digital. Gran Turismo is a registered trademark
