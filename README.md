@@ -103,14 +103,21 @@ first time.
 
 **macOS**
 - Gatekeeper blocks the first run ("cannot be opened" / "Apple could not
-  verify"). Either run this once in the extracted folder:
+  verify"). Run this once in the extracted folder; it clears the download
+  flag from the relay and its web app:
   ```
-  xattr -d com.apple.quarantine pit-wall-relay
+  xattr -dr com.apple.quarantine .
   ```
-  or try to run it once, then go to **System Settings → Privacy & Security**
-  and click **Open Anyway**.
-- If macOS asks to let it find devices on your local network or accept
-  incoming connections, click **Allow**.
+  If the relay later fails with "…is not an AOT snapshot, it cannot be run
+  with 'dartaotruntime'", the flag is still set: run the command again.
+- macOS decides per app whether programs may reach devices on your local
+  network, and for the relay that's the app you start it from (Terminal,
+  iTerm, VS Code…). If the relay can't reach the PlayStation ("No route to
+  host"), make sure that app is on under **System Settings → Privacy &
+  Security → Local Network**, then quit it completely (⌘Q), even if it was
+  already on, reopen it and start the relay again. When macOS asks to let
+  it find devices on your local network or accept incoming connections,
+  click **Allow**.
 
 **Windows**
 - If SmartScreen shows "Windows protected your PC", click **More info**, then
@@ -188,7 +195,13 @@ retries every 10 seconds until it finds the console.
 
 **"Could not find a PlayStation automatically"**
 : Make sure the console is on and on the same network, then pass its
-  address with `--ps-ip`.
+  address with `--ps-ip`. On a Mac, also check the Local Network setting
+  under [First run](#first-run).
+
+**"Could not reach the PlayStation at …"**
+: The relay keeps trying, so it picks up as soon as the console is on and
+  reachable. On a Mac, see the Local Network note under
+  [First run](#first-run).
 
 **Pit Wall says "Waiting for telemetry" or "Waiting for the track"**
 : Check the relay is still running and connected to the right PlayStation
