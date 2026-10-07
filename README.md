@@ -8,8 +8,9 @@ its live telemetry over your local network, and passes it on to **Pit Wall**
 dashboards on any device: a phone, a tablet, another computer or a web
 browser.
 
-- The **web version** of Pit Wall needs it: browsers can't receive the
-  console's telemetry directly.
+- It **serves Pit Wall in any browser**: open the address it prints on a
+  laptop, a TV or an iPhone and the Drive board goes live, with nothing to
+  set up.
 - It lets **several dashboards share one connection** to the console, so you
   can watch on a tablet in the rig and a laptop on the desk at the same time.
 
@@ -38,7 +39,8 @@ M…" is Apple silicon, "Processor: … Intel" is Intel. On Linux, `uname -m`
 prints `x86_64` (linux-x64) or `aarch64` (linux-arm64).
 
 Each download contains the `pit-wall-relay` program (`pit-wall-relay.exe` on
-Windows) and a `README.txt` with these instructions.
+Windows), the browser version of Pit Wall in a `web` folder (keep it next to
+the program), and a `README.txt` with these instructions.
 
 ## Quick start
 
@@ -62,21 +64,29 @@ Windows) and a `README.txt` with these instructions.
    The first time, your computer may ask for permission; see
    [First run](#first-run) below.
 
-4. **Note the address it prints**, for example:
+4. **Note the addresses it prints**, for example:
 
    ```
    This computer on the network:
      LAN IP:    192.168.1.50   (en0, same network as the PlayStation)
      Hostname:  My-Computer.local
 
-   In the dashboard on another device, choose relay mode and enter:
+   Open Pit Wall in a browser on any device on this network:
+     http://192.168.1.50:33750
+     http://My-Computer.local:33750
+
+   In the Pit Wall app on another device, choose relay mode and enter:
      ws://192.168.1.50:33750
      ws://My-Computer.local:33750   (keeps working if the IP changes; needs .local name support)
-   On this computer: ws://localhost:33750
+   On this computer: http://localhost:33750 (browser), ws://localhost:33750
    ```
 
-5. **Connect Pit Wall:** open the connection settings (tap the status pill
-   at the top), choose **Relay**, and enter one of those addresses. The
+5. **Open Pit Wall:** in a **browser**, open one of the `http://` addresses;
+   it connects to the relay by itself. The browser version includes the
+   Drive board; every other board, lap analysis and custom dashboards are in
+   the [Pit Wall app](https://play.google.com/store/apps/details?id=com.durfu.pitwall).
+   In the **app**, open the connection settings (tap the status pill at the
+   top), choose **Relay**, and enter one of the `ws://` addresses. The
    hostname keeps working if the computer's IP address changes; if a device
    can't resolve it (some Android devices and networks can't), use the IP
    address instead.
@@ -122,7 +132,8 @@ first time.
 | --- | --- |
 | `--ps-ip <ip>` | The PlayStation's IP address. Searched for automatically if omitted. |
 | `-b, --heartbeat <A\|B\|~>` | Telemetry packet type. `A` (default) is the standard packet. `B` adds motion data (sway, heave, surge, wheel rotation). `~` adds filtered throttle/brake and energy recovery. |
-| `-p, --port <port>` | Port dashboards connect to (default `33750`). |
+| `-p, --port <port>` | Port for dashboards and browsers (default `33750`). |
+| `--web <folder>` | Serve the browser version from this folder instead of the `web` folder next to the relay. |
 | `--version` | Print the version and exit. |
 | `-h, --help` | Show help. |
 
@@ -134,8 +145,8 @@ Pit Wall's connection settings; there's no need to restart it.
 - The relay and the PlayStation must be on the **same local network**.
   Dashboards connect to the relay, so they need to reach that computer too.
   Guest Wi-Fi networks often block devices from seeing each other.
-- Ports: **TCP 33750** for dashboards (change with `--port`), and **UDP
-  33739/33740** between the relay and the PlayStation.
+- Ports: **TCP 33750** for dashboards and browsers (change with `--port`),
+  and **UDP 33739/33740** between the relay and the PlayStation.
 
 ## Keep it running on a Raspberry Pi (or any Linux machine)
 
@@ -189,10 +200,10 @@ retries every 10 seconds until it finds the console.
   (on Windows, for Private networks), and try the IP address instead of the
   hostname.
 
-**The web version of Pit Wall can't connect**
-: Browsers block `ws://` connections from pages served over `https://`.
-  Open the web dashboard over `http://` on your local network, or use the
-  Pit Wall app.
+**The browser version doesn't load**
+: Open the `http://` address the relay printed (not `https://`), from a
+  device on the same network, and keep the `web` folder next to the relay
+  program.
 
 **On Windows the window closes straight away**
 : Run it from Command Prompt or PowerShell to see the message.
